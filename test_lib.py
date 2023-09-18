@@ -50,16 +50,33 @@ class TestDescribeSelectedColumns(unittest.TestCase):
         with self.assertRaises(ValueError):
             describe_selected_columns(df, columns)
 
-    # def test_describe_selected_columns_valid_columns(self):
-    #     df = pd.DataFrame(
-    #         {"artist": ["Bob", "Mary", "Joe"], "genres": ["Rock", "Pop", "Country"]}
-    #     )
-    #     columns = ["artist", "genres"]
-    #     expected_descriptive_stats = pd.DataFrame(
-    #         {"artist": ["Bob", "Mary", "Joe"], "genres": [1, 1, 1]}, dtype="object"
-    #     )
-    #     actual_descriptive_stats = describe_selected_columns(df, columns)
-    #     self.assertEqual(expected_descriptive_stats, actual_descriptive_stats)
+    def test_describe_selected_columns_returns_correct_descriptive_stats(self):
+        df = pd.DataFrame({"age": [25, 30, 35]})
+
+        columns = ["age"]
+
+        expected_descriptive_stats = pd.DataFrame(
+            {
+                "count": [3.0],
+                "mean": [30.0],
+                "std": [5.0],
+                "min": [25.0],
+                "25%": [27.5],
+                "50%": [30.0],
+                "75%": [32.5],
+                "max": [35.0],
+            }
+        )
+
+        actual_descriptive_stats = describe_selected_columns(df, columns).T
+        expected_descriptive_stats = expected_descriptive_stats.reset_index(
+            drop=True, inplace=True
+        )
+        actual_descriptive_stats = actual_descriptive_stats.reset_index(
+            drop=True, inplace=True
+        )
+
+        self.assertEqual(expected_descriptive_stats, actual_descriptive_stats)
 
 
 class TestConvertDurationMsToDurationM(unittest.TestCase):
