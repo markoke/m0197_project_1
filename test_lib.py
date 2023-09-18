@@ -3,7 +3,7 @@ Test goes here
 
 """
 
-from src.calculator import add
+from src.further_clean_save_json import add
 
 
 def test_add():
