@@ -11,12 +11,12 @@ def count_genres(genres_list):
     """Counts the number of genres the artist plays.
 
     Args:
-        sequence: list of genres.
+        genres_list (list): List of genres.
 
     Returns:
-        The number of items in list .
+        int: The number of genres in the list.
     """
-    return genres_list.count(",") + 1
+    return len(genres_list)
 
 
 def describe_selected_columns(df, columns):
